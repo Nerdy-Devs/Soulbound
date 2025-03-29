@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://1pni7gbatwvf"]
+
+[ext_resource type="Texture2D" uid="uid://doryofc3rfkib" path="res://sprites/Wizard Pack/Run/Run-1.png" id="1_xp1qg"]
+[ext_resource type="Texture2D" uid="uid://3cn3yx1xg6w6" path="res://sprites/Wizard Pack/Run/Run-2.png" id="2_q22k8"]
+[ext_resource type="Texture2D" uid="uid://0xaqi8gaaiin" path="res://sprites/Wizard Pack/Run/Run-3.png" id="3_88t6p"]
+[ext_resource type="Texture2D" uid="uid://b04iltmjevxl0" path="res://sprites/Wizard Pack/Run/Run-4.png" id="4_j4obm"]
+[ext_resource type="Texture2D" uid="uid://c3bcnue6cwvpr" path="res://sprites/Wizard Pack/Run/Run-5.png" id="5_uxgh1"]
+[ext_resource type="Texture2D" uid="uid://cn5w5rab0m3ku" path="res://sprites/Wizard Pack/Run/Run-6.png" id="6_phgqq"]
+[ext_resource type="Texture2D" uid="uid://d3hux6303i5b0" path="res://sprites/Wizard Pack/Run/Run-7.png" id="7_ojmxd"]
+[ext_resource type="Texture2D" uid="uid://ctjjryba8cen6" path="res://sprites/Wizard Pack/Run/Run-8.png" id="8_fypd2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kgjmf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xp1qg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q22k8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_88t6p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j4obm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_uxgh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_phgqq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ojmxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fypd2")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="Wizard-1" type="Area2D"]
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_kgjmf")
+animation = &"run"
+frame_progress = 0.786572
+speed_scale = 2.5

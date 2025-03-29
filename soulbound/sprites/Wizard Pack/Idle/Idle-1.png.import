@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://birxdjy832y3"
-path="res://.godot/imported/Attack2.png-eb442f25df9898699508bd91a3444cc6.ctex"
+uid="uid://dh0gak3el5tr"
+path="res://.godot/imported/Idle-1.png-f681c6ec9dac3a7944ee4ac4a7d8a141.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Wizard Pack/Attack2.png"
-dest_files=["res://.godot/imported/Attack2.png-eb442f25df9898699508bd91a3444cc6.ctex"]
+source_file="res://sprites/Wizard Pack/Idle/Idle-1.png"
+dest_files=["res://.godot/imported/Idle-1.png-f681c6ec9dac3a7944ee4ac4a7d8a141.ctex"]
 
 [params]
 
