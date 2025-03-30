@@ -7,7 +7,7 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	
 func _process(delta: float) -> void:
-	var velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("player_1_move_up"):
 		velocity.y -= 1
@@ -20,21 +20,21 @@ func _process(delta: float) -> void:
 	
 	# If the player is going up/down, use the jump animation
 	if velocity.y != 0:
-		$AnimatedSprite2D.animation = "jump"
-		$AnimatedSprite2D.flip_h = velocity.x < 0	
+		$Wizard_Animated_1.animation = "jump"
+		$Wizard_Animated_1.flip_h = velocity.x < 0
 		
 	# If the player is going left or right use the run animation
 	elif velocity.x != 0:
-		$AnimatedSprite2D.animation = "run"
-		$AnimatedSprite2D.flip_h = velocity.x < 0
+		$Wizard_Animated_1.animation = "run"
+		$Wizard_Animated_1.flip_h = velocity.x < 0
 
-	# If the player isn't moving, use the idle animation
+	# If the player isn't moving, use the idle animationasd
 	if velocity.length() <= 0:
-		$AnimatedSprite2D.animation = "idle"
+		$Wizard_Animated_1.animation = "idle"
 	
 	velocity = velocity.normalized() * speed
 		
-	$AnimatedSprite2D.play()
+	$Wizard_Animated_1.play()
 		
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
