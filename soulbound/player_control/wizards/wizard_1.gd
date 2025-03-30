@@ -2,7 +2,7 @@ extends Wizard
 
 func _ready() -> void:
 	setup(1)
+	print("Called")
 
 func _process(delta: float) -> void:
-	var new_pose = get_new_position(delta)
-	position = new_pose
+	position = get_new_position(delta)
