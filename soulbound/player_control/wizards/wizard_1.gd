@@ -1,8 +1,7 @@
 extends Wizard
 
 func _ready() -> void:
-	setup(1)
-	print("Called")
+	setup_wizard(1)
 
 func _process(delta: float) -> void:
 	position = get_new_position(delta)

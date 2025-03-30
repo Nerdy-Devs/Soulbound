@@ -90,12 +90,12 @@ size = Vector2(58, 86)
 [node name="Wizard_1" type="CharacterBody2D"]
 script = ExtResource("1_uryu8")
 
-[node name="Wizard_Animated_1" type="AnimatedSprite2D" parent="."]
+[node name="Wizard_Animated" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.3, 0.308)
 sprite_frames = SubResource("SpriteFrames_a0okh")
 animation = &"idle"
 speed_scale = 2.5
 
-[node name="Wizard_Collision_1" type="CollisionShape2D" parent="."]
+[node name="Wizard_Collision" type="CollisionShape2D" parent="."]
 scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_kgjmf")
