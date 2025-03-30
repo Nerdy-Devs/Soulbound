@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://1pni7gbatwvf"]
+[gd_scene load_steps=20 format=3 uid="uid://1pni7gbatwvf"]
 
 [ext_resource type="Script" uid="uid://drjynglhd556m" path="res://player_control/wizards/wizard_1.gd" id="1_uryu8"]
 [ext_resource type="Texture2D" uid="uid://dh0gak3el5tr" path="res://sprites/Wizard/Idle/Idle-1.png" id="2_v34r3"]
@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://cn5w5rab0m3ku" path="res://sprites/Wizard/Run/Run-6.png" id="15_jmj6v"]
 [ext_resource type="Texture2D" uid="uid://d3hux6303i5b0" path="res://sprites/Wizard/Run/Run-7.png" id="16_320th"]
 [ext_resource type="Texture2D" uid="uid://ctjjryba8cen6" path="res://sprites/Wizard/Run/Run-8.png" id="17_fqnd0"]
-[ext_resource type="AudioStream" uid="uid://56cbdhivrbqb" path="res://audio/map_1/nearly complete song.mp3" id="18_v34r3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a0okh"]
 animations = [{
@@ -100,8 +99,3 @@ speed_scale = 2.5
 [node name="Wizard_Collision_1" type="CollisionShape2D" parent="."]
 scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_kgjmf")
-
-[node name="Test" type="AudioStreamPlayer2D" parent="."]
-visible = false
-stream = ExtResource("18_v34r3")
-autoplay = true
