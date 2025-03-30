@@ -1,6 +1,6 @@
-extends Area2D
+extends CharacterBody2D
 
-var speed = 4
+@export var speed = 100
 var screen_size
 
 func _ready():
@@ -17,15 +17,18 @@ func _process(delta: float) -> void:
 		velocity.x -= 1
 	if Input.is_action_pressed("player_1_move_right"):
 		velocity.x += 1
-
+	
+	# If the player is going up/down, use the jump animation
 	if velocity.y != 0:
 		$AnimatedSprite2D.animation = "jump"
 		$AnimatedSprite2D.flip_h = velocity.x < 0	
-
+		
+	# If the player is going left or right use the run animation
 	elif velocity.x != 0:
 		$AnimatedSprite2D.animation = "run"
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 
+	# If the player isn't moving, use the idle animation
 	if velocity.length() <= 0:
 		$AnimatedSprite2D.animation = "idle"
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://1pni7gbatwvf"]
+[gd_scene load_steps=20 format=3 uid="uid://1fgras2fkti6"]
 
 [ext_resource type="Script" uid="uid://drjynglhd556m" path="res://player_control/wizards/wizard_1.gd" id="1_fypd2"]
 [ext_resource type="Texture2D" uid="uid://dh0gak3el5tr" path="res://sprites/Wizard/Idle/Idle-1.png" id="1_ojmxd"]
@@ -13,12 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://c3bcnue6cwvpr" path="res://sprites/Wizard/Run/Run-5.png" id="5_uxgh1"]
 [ext_resource type="Texture2D" uid="uid://bdvi0cwjgd5a4" path="res://sprites/Wizard/Idle/Idle-6.png" id="6_auxxn"]
 [ext_resource type="Texture2D" uid="uid://cn5w5rab0m3ku" path="res://sprites/Wizard/Run/Run-6.png" id="6_phgqq"]
-[ext_resource type="Texture2D" uid="uid://sp0rcksandtg" path="res://sprites/Wizard Pack/Jump/Jump-1.png" id="7_kgjmf"]
 [ext_resource type="Texture2D" uid="uid://d3hux6303i5b0" path="res://sprites/Wizard/Run/Run-7.png" id="7_ojmxd"]
-[ext_resource type="Texture2D" uid="uid://jcnhpdxroid7" path="res://sprites/Wizard Pack/Jump/Jump-2.png" id="8_7kgyr"]
+[ext_resource type="Texture2D" uid="uid://sp0rcksandtg" path="res://sprites/Wizard Pack/Jump/Jump-1.png" id="8_7kgyr"]
 [ext_resource type="Texture2D" uid="uid://ctjjryba8cen6" path="res://sprites/Wizard/Run/Run-8.png" id="8_fypd2"]
+[ext_resource type="Texture2D" uid="uid://jcnhpdxroid7" path="res://sprites/Wizard Pack/Jump/Jump-2.png" id="9_a0okh"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_a0okh"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_kgjmf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -45,10 +45,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 4.0,
-"texture": ExtResource("7_kgjmf")
+"texture": ExtResource("8_7kgyr")
 }, {
 "duration": 4.0,
-"texture": ExtResource("8_7kgyr")
+"texture": ExtResource("9_a0okh")
 }],
 "loop": true,
 "name": &"jump",
@@ -84,18 +84,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgjmf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00brx"]
 size = Vector2(58, 86)
 
-[node name="Wizard_1" type="CharacterBody2D"]
+[node name="Wizard-1" type="Area2D"]
 script = ExtResource("1_fypd2")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.3, 0.308)
-sprite_frames = SubResource("SpriteFrames_a0okh")
+scale = Vector2(0.2, 0.205)
+sprite_frames = SubResource("SpriteFrames_kgjmf")
 animation = &"idle"
+frame_progress = 0.214158
 speed_scale = 2.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.3, 0.3)
-shape = SubResource("RectangleShape2D_kgjmf")
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_00brx")
+script = ExtResource("1_fypd2")
