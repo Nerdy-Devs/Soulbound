@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0xaqi8gaaiin"
-path="res://.godot/imported/Run-3.png-9c9d362a77ca87ad5828756acfa69d13.ctex"
+uid="uid://h4n3eecfqdn0"
+path="res://.godot/imported/Fall.png-c75d940f8832beb27428795935ef3ad9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Wizard Pack/Run/Run-3.png"
-dest_files=["res://.godot/imported/Run-3.png-9c9d362a77ca87ad5828756acfa69d13.ctex"]
+source_file="res://sprites/Wizard/Fall.png"
+dest_files=["res://.godot/imported/Fall.png-c75d940f8832beb27428795935ef3ad9.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doryofc3rfkib"
-path="res://.godot/imported/Run-1.png-3b19441307f2bbee56a30401bdf43810.ctex"
+uid="uid://mfind66bqrsu"
+path="res://.godot/imported/Attack1.png-dbfc7bd484ca1498d5fa65bf4773077b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Wizard Pack/Run/Run-1.png"
-dest_files=["res://.godot/imported/Run-1.png-3b19441307f2bbee56a30401bdf43810.ctex"]
+source_file="res://sprites/Wizard/Attack1.png"
+dest_files=["res://.godot/imported/Attack1.png-dbfc7bd484ca1498d5fa65bf4773077b.ctex"]
 
 [params]
 

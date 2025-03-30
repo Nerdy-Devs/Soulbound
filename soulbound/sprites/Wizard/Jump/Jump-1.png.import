@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3hux6303i5b0"
-path="res://.godot/imported/Run-7.png-ab0d2c4569a21a6264ae6e3e79abc101.ctex"
+uid="uid://sp0rcksandtg"
+path="res://.godot/imported/Jump-1.png-531e257610ac7fe38cd7876e5c450fcc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Wizard Pack/Run/Run-7.png"
-dest_files=["res://.godot/imported/Run-7.png-ab0d2c4569a21a6264ae6e3e79abc101.ctex"]
+source_file="res://sprites/Wizard/Jump/Jump-1.png"
+dest_files=["res://.godot/imported/Jump-1.png-531e257610ac7fe38cd7876e5c450fcc.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bysmcvc4k08kd"
-path="res://.godot/imported/Idle-4.png-fd507101feff802e96d2ce1656c11ff1.ctex"
+uid="uid://sp0rcksandtg"
+path="res://.godot/imported/Jump-1.png-36376a8d171c8b9033a6d91cdbf10651.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Wizard Pack/Idle/Idle-4.png"
-dest_files=["res://.godot/imported/Idle-4.png-fd507101feff802e96d2ce1656c11ff1.ctex"]
+source_file="res://sprites/Wizard Pack/Jump/Jump-1.png"
+dest_files=["res://.godot/imported/Jump-1.png-36376a8d171c8b9033a6d91cdbf10651.ctex"]
 
 [params]
 

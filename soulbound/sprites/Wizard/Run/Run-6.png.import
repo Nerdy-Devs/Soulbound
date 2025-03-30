@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b04iltmjevxl0"
-path="res://.godot/imported/Run-4.png-a08f0d5f9f59487587b8ab90ba2b1b59.ctex"
+uid="uid://cn5w5rab0m3ku"
+path="res://.godot/imported/Run-6.png-b9e43dc2abea9c626301cf1d388d7ff3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Wizard Pack/Run/Run-4.png"
-dest_files=["res://.godot/imported/Run-4.png-a08f0d5f9f59487587b8ab90ba2b1b59.ctex"]
+source_file="res://sprites/Wizard/Run/Run-6.png"
+dest_files=["res://.godot/imported/Run-6.png-b9e43dc2abea9c626301cf1d388d7ff3.ctex"]
 
 [params]
 
