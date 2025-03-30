@@ -5,6 +5,14 @@ extends CharacterBody2D
 var speed : int = 100
 var screen_size
 var controller_input : String
+@export var player_number : int = -1
+
+func _ready() -> void:
+	screen_size = get_viewport_rect().size
+	controller_input = "player_" + str(player_number)
+	
+func _process(delta: float) -> void:
+	position = get_new_position(delta)
 	
 func get_new_position(delta) -> Vector2:
 	var new_pose : Vector2 = position
@@ -41,7 +49,3 @@ func get_new_position(delta) -> Vector2:
 	new_pose += velocity * delta
 	new_pose = new_pose.clamp(Vector2.ZERO, screen_size)
 	return new_pose
-
-func setup_wizard(player_number: int) -> void:
-	screen_size = get_viewport_rect().size
-	controller_input = "player_" + str(player_number)

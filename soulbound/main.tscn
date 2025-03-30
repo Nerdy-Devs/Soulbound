@@ -1,12 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7rwedjl6p412"]
+[gd_scene load_steps=2 format=3 uid="uid://b7rwedjl6p412"]
 
-[ext_resource type="Script" uid="uid://bm4745jiy6uj2" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://1pni7gbatwvf" path="res://player_control/wizards/wizard_1.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://chvgorpuucvv0" path="res://player_control/wizards/wizard_2.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dgambplpt6lmx" path="res://player_control/wizards/wizard.tscn" id="1_ig7tw"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_ig7tw")
 
-[node name="Wizard_1" parent="." instance=ExtResource("2_0xm2m")]
+[node name="Wizard" parent="." instance=ExtResource("1_ig7tw")]
+player_number = 1
 
-[node name="Wizard_2" parent="." instance=ExtResource("3_h2yge")]
+[node name="Wizard2" parent="." instance=ExtResource("1_ig7tw")]
+player_number = 2
