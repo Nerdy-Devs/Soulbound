@@ -2,7 +2,8 @@ class_name Wizard
 
 extends CharacterBody2D
 
-var speed : int = 100
+const SPEED : int = 300
+const JUMP_VELOCITY = -400.0
 var screen_size
 
 ## Which controller to use
@@ -21,29 +22,28 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	controller_input = "player_" + str(player_number)
 	
-func _process(delta: float) -> void:
-	position = get_new_position(delta)
+func _physics_process(delta: float) -> void:
+	set_new_position(delta)
 	set_animation()
 	
-func get_new_position(delta) -> Vector2:
-	var new_pose : Vector2 = position
-	velocity = Vector2.ZERO
-	
-	# If the wizard is attacking, he can't move
-	if !$Wizard_Animated.animation.contains("attack"):
-		if Input.is_action_pressed(controller_input + "_move_up"):
-			velocity.y -= 1
-		if Input.is_action_pressed(controller_input + "_move_down"):
-			velocity.y += 1
-		if Input.is_action_pressed(controller_input + "_move_left"):
-			velocity.x -= 1
-		if Input.is_action_pressed(controller_input + "_move_right"):
-			velocity.x += 1
-	
-	velocity = velocity.normalized() * speed
-	
-	new_pose += velocity * delta
-	return new_pose
+func set_new_position(delta) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed("player_1_move_up") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction = Input.get_axis("player_1_move_left", "player_1_move_right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
 
 func set_animation() -> void:
 	if Input.is_action_pressed(controller_input + "_attack_1"):

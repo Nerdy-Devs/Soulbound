@@ -203,7 +203,6 @@ tile_map_data = PackedByteArray("AAD8/wEAAQABAAAAAAD9/wEAAQABAAAAAAD+/wEAAQABAAA
 tile_set = SubResource("TileSet_0l2ke")
 
 [node name="Wizard" parent="." instance=ExtResource("3_2jira")]
-position = Vector2(-98, -26)
 player_number = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
