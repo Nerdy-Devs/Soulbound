@@ -2,8 +2,8 @@ class_name Wizard
 
 extends CharacterBody2D
 
-const SPEED : int = 300
-const JUMP_VELOCITY = -400.0
+const SPEED : int = 200
+const JUMP_VELOCITY = -200.0
 var screen_size
 
 ## Which controller to use
@@ -20,7 +20,12 @@ var is_left : bool = false
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
+	
 	controller_input = "player_" + str(player_number)
+	
+	# Assign ownership to ensure only the correct client controls this character
+	if player_number != multiplayer.get_unique_id():
+		set_multiplayer_authority(player_number)
 	
 func _physics_process(delta: float) -> void:
 	set_new_position(delta)

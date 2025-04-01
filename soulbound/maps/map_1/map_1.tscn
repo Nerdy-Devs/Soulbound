@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://ccbf7vgn4pxmg"]
+[gd_scene load_steps=8 format=4 uid="uid://ccbf7vgn4pxmg"]
 
 [ext_resource type="Texture2D" uid="uid://bjeeet8dquddr" path="res://maps/map_1/map_1_tiles.png" id="1_c3ita"]
 [ext_resource type="Texture2D" uid="uid://b4p0goaspdxm8" path="res://maps/map_1/tiles_0-1.png" id="2_xjgmx"]
 [ext_resource type="PackedScene" uid="uid://dgambplpt6lmx" path="res://player_control/wizards/wizard.tscn" id="3_2jira"]
+[ext_resource type="Script" uid="uid://rjk7sktwotpu" path="res://network.gd" id="5_2jira"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q80t3"]
 texture = ExtResource("1_c3ita")
@@ -207,3 +208,7 @@ player_number = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.485, 1.485)
+
+[node name="temp_network" type="Node" parent="."]
+script = ExtResource("5_2jira")
+player_scene = ExtResource("3_2jira")
