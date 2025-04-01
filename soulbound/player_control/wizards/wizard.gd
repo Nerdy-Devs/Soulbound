@@ -43,7 +43,6 @@ func get_new_position(delta) -> Vector2:
 	velocity = velocity.normalized() * speed
 	
 	new_pose += velocity * delta
-	new_pose = new_pose.clamp(Vector2.ZERO, screen_size)
 	return new_pose
 
 func set_animation() -> void:
