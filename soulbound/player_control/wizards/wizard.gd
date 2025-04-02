@@ -30,6 +30,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	set_new_position(delta)
 	set_animation()
+	check_position()
 	
 func set_new_position(delta) -> void:
 	# Add the gravity.
@@ -70,6 +71,27 @@ func set_animation() -> void:
 	if velocity.x != 0:
 		is_left = Input.is_action_pressed(controller_input + "_move_left")
 				
+	velocity.x = clamp(velocity.x, -50, 50)
+	velocity.y = clamp(velocity.y, -300, 300)
+				
 	$Wizard_Animated.flip_h = is_left
-	5
+	
 	$Wizard_Animated.play()
+	
+func check_position():
+	var pose = position
+	
+	# Checks X
+	if pose[0] < -440:
+		pose[0] = 440
+	elif pose[0] > 440:
+		pose[0] = -440
+	
+	# Checks Y
+	if pose[1] > 250:
+		pose[1] = -250
+	elif pose[1] < -250:
+		pose[1] = 250	
+	
+	
+	position = pose

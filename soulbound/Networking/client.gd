@@ -34,7 +34,7 @@ func spawn_player(peer_id : int):
 	#player_instance.set_network_master(peer_id)  # Assign this player to the correct peer
 
 	# Set a random spawn position (you can modify this based on your needs)
-	player_instance.position = Vector2(randf_range(-500, 500), randf_range(-500, 500))
+	player_instance.position = Vector2(randf_range(-240, 240), 0)
 
 	# Add the player instance to the scene tree
 	get_tree().root.add_child(player_instance)
