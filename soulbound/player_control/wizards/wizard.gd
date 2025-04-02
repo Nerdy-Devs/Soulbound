@@ -71,5 +71,5 @@ func set_animation() -> void:
 		is_left = Input.is_action_pressed(controller_input + "_move_left")
 				
 	$Wizard_Animated.flip_h = is_left
-	
+	5
 	$Wizard_Animated.play()

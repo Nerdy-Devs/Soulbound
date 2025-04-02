@@ -13,10 +13,10 @@ offset_bottom = -202.0
 text = "Start Server"
 
 [node name="Connect" type="Button" parent="."]
-offset_left = 299.0
-offset_top = -196.0
-offset_right = 399.0
-offset_bottom = -165.0
+offset_left = 303.0
+offset_top = -194.0
+offset_right = 403.0
+offset_bottom = -163.0
 text = "Join Server"
 
 [connection signal="pressed" from="Start Server" to="." method="start_server"]
