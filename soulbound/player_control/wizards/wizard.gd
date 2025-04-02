@@ -16,7 +16,7 @@ var controller_input : String
 
 ## Used to keep track of the direction the wizard is facing
 var is_left : bool = false
-
+var master_id : int
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -33,23 +33,24 @@ func _physics_process(delta: float) -> void:
 	check_position()
 	
 func set_new_position(delta) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	if master_id == multiplayer.get_unique_id():
+		# Add the gravity.
+		if not is_on_floor():
+			velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("player_1_move_up"):
-		velocity.y = JUMP_VELOCITY
+		# Handle jump.
+		if Input.is_action_just_pressed("player_1_move_up"):
+			velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("player_1_move_left", "player_1_move_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction = Input.get_axis("player_1_move_left", "player_1_move_right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	move_and_slide()
+		move_and_slide()
 
 func set_animation() -> void:
 	if Input.is_action_pressed(controller_input + "_attack_1"):
