@@ -116,6 +116,7 @@ func _on_connected_ok():
 
 
 func _on_connected_fail():
+	print("Con Failed")
 	multiplayer.multiplayer_peer = null
 	
 func _on_server_disconnected():

@@ -203,7 +203,3 @@ tile_set = SubResource("TileSet_0l2ke")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.485, 1.485)
-
-[node name="temp_network" type="Node" parent="."]
-script = ExtResource("5_2jira")
-player_scene = ExtResource("3_2jira")
