@@ -1,11 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7rwedjl6p412"]
+[gd_scene load_steps=3 format=3 uid="uid://b7rwedjl6p412"]
 
-[ext_resource type="PackedScene" uid="uid://dgambplpt6lmx" path="res://player_control/wizards/wizard.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://rjk7sktwotpu" path="res://network.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ccbf7vgn4pxmg" path="res://maps/map_1/map_1.tscn" id="1_ig7tw"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_0xm2m")
 
-[node name="Wizard" parent="." instance=ExtResource("1_ig7tw")]
-player_number = 1
+[node name="Map_1" parent="." instance=ExtResource("1_ig7tw")]
 
-[node name="Wizard2" parent="." instance=ExtResource("1_ig7tw")]
-player_number = 2
+[node name="Start Server" type="Button" parent="."]
+offset_left = 303.0
+offset_top = -233.0
+offset_right = 403.0
+offset_bottom = -202.0
+text = "Start Server"
+
+[node name="Network" type="Node" parent="."]
+script = ExtResource("1_0xm2m")
+
+[node name="Join Server" type="Button" parent="."]
+offset_left = 299.0
+offset_top = -196.0
+offset_right = 399.0
+offset_bottom = -165.0
+text = "Join Server"
+
+[connection signal="button_down" from="Start Server" to="Network" method="create_game"]
+[connection signal="button_down" from="Join Server" to="Network" method="join_game"]

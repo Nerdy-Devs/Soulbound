@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+Soulbound.sh
+Soulbound.x86_64

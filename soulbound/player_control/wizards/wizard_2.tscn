@@ -1,0 +1,101 @@
+[gd_scene load_steps=20 format=3 uid="uid://chvgorpuucvv0"]
+
+[ext_resource type="Script" uid="uid://b7lvnax8oudmx" path="res://player_control/wizards/wizard_2.gd" id="1_dgusq"]
+[ext_resource type="Texture2D" uid="uid://dh0gak3el5tr" path="res://sprites/Wizard/Idle/Idle-1.png" id="2_k5n78"]
+[ext_resource type="Texture2D" uid="uid://cruxdk4gsi0lp" path="res://sprites/Wizard/Idle/Idle-2.png" id="3_dycw3"]
+[ext_resource type="Texture2D" uid="uid://sa15rvrah6df" path="res://sprites/Wizard/Idle/Idle-3.png" id="4_5pjmq"]
+[ext_resource type="Texture2D" uid="uid://bysmcvc4k08kd" path="res://sprites/Wizard/Idle/Idle-4.png" id="5_7uqln"]
+[ext_resource type="Texture2D" uid="uid://dbxf4tjrb0cf6" path="res://sprites/Wizard/Idle/Idle-5.png" id="6_18psa"]
+[ext_resource type="Texture2D" uid="uid://bdvi0cwjgd5a4" path="res://sprites/Wizard/Idle/Idle-6.png" id="7_w7ivb"]
+[ext_resource type="Texture2D" uid="uid://sp0rcksandtg" path="res://sprites/Wizard/Jump/Jump-1.png" id="8_3x78h"]
+[ext_resource type="Texture2D" uid="uid://jcnhpdxroid7" path="res://sprites/Wizard/Jump/Jump-2.png" id="9_m41nq"]
+[ext_resource type="Texture2D" uid="uid://doryofc3rfkib" path="res://sprites/Wizard/Run/Run-1.png" id="10_luh26"]
+[ext_resource type="Texture2D" uid="uid://3cn3yx1xg6w6" path="res://sprites/Wizard/Run/Run-2.png" id="11_8gqsl"]
+[ext_resource type="Texture2D" uid="uid://0xaqi8gaaiin" path="res://sprites/Wizard/Run/Run-3.png" id="12_caj00"]
+[ext_resource type="Texture2D" uid="uid://b04iltmjevxl0" path="res://sprites/Wizard/Run/Run-4.png" id="13_5rq2w"]
+[ext_resource type="Texture2D" uid="uid://c3bcnue6cwvpr" path="res://sprites/Wizard/Run/Run-5.png" id="14_yoxhq"]
+[ext_resource type="Texture2D" uid="uid://cn5w5rab0m3ku" path="res://sprites/Wizard/Run/Run-6.png" id="15_owtj7"]
+[ext_resource type="Texture2D" uid="uid://d3hux6303i5b0" path="res://sprites/Wizard/Run/Run-7.png" id="16_n8qrt"]
+[ext_resource type="Texture2D" uid="uid://ctjjryba8cen6" path="res://sprites/Wizard/Run/Run-8.png" id="17_vdx4w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6demt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k5n78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dycw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5pjmq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7uqln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_18psa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w7ivb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": ExtResource("8_3x78h")
+}, {
+"duration": 4.0,
+"texture": ExtResource("9_m41nq")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_luh26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8gqsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_caj00")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5rq2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_yoxhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_owtj7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_n8qrt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_vdx4w")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfyqd"]
+size = Vector2(58, 86)
+
+[node name="wizard_2" type="CharacterBody2D"]
+script = ExtResource("1_dgusq")
+
+[node name="Wizard_Animated" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.308)
+sprite_frames = SubResource("SpriteFrames_6demt")
+animation = &"idle"
+speed_scale = 2.5
+
+[node name="Wizard_Collision" type="CollisionShape2D" parent="."]
+scale = Vector2(0.3, 0.3)
+shape = SubResource("RectangleShape2D_lfyqd")
