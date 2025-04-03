@@ -1,11 +1,45 @@
 extends CharacterBody2D
 
+@onready var farmThing = $Farm_thing
+
+@onready var noPowerSprite = $No_Power
+@onready var swordPowerSprite = $Sword
+@onready var blastPowerSprite = $Blast
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+#check if the player is holding farm stuff
+var isHolding := false
+#check if the player is powered and what power they have
+var isPowered := false
+#no power = None   sword power = Sword   blaster power = Blast
+var powerType := "None"
+
 
 func _physics_process(delta):
+	
+	if(powerType == "None"):
+		noPowerSprite.show()
+		swordPowerSprite.hide()
+		blastPowerSprite.hide()
+	if(powerType == "Sword"):
+		noPowerSprite.hide()
+		swordPowerSprite.show()
+		blastPowerSprite.hide()
+	if(powerType == "Blast"):
+		noPowerSprite.hide()
+		swordPowerSprite.hide()
+		blastPowerSprite.show()
+	
+	#handles showing and hiding the farm thing
+	if(isHolding == true):
+		farmThing.show()
+	else:
+		farmThing.hide()
+	
+	
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

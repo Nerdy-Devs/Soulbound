@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://ccbf7vgn4pxmg"]
+[gd_scene load_steps=8 format=4 uid="uid://ccbf7vgn4pxmg"]
 
 [ext_resource type="Texture2D" uid="uid://bjeeet8dquddr" path="res://maps/map_1/map_1_tiles.png" id="1_c3ita"]
 [ext_resource type="Texture2D" uid="uid://b4p0goaspdxm8" path="res://maps/map_1/tiles_0-1.png" id="2_xjgmx"]
+[ext_resource type="PackedScene" uid="uid://cadvvrbmycror" path="res://stage_entities/farm/farm.tscn" id="3_xjgmx"]
+[ext_resource type="PackedScene" uid="uid://b8ard06kb6521" path="res://player_control/basic/basic_char_template.tscn" id="4_2jira"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q80t3"]
 texture = ExtResource("1_c3ita")
@@ -203,3 +205,9 @@ tile_set = SubResource("TileSet_0l2ke")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.485, 1.485)
+
+[node name="Farm" parent="." instance=ExtResource("3_xjgmx")]
+position = Vector2(-49, 8)
+
+[node name="Basic_player" parent="." instance=ExtResource("4_2jira")]
+position = Vector2(-151, -21)

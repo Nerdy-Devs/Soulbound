@@ -7,13 +7,24 @@
 radius = 64.0
 height = 128.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Basic_player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_ee5su")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.125, 0.125)
-texture = ExtResource("1_13yn0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.125, 0.125)
 shape = SubResource("CapsuleShape2D_ee5su")
+
+[node name="Farm_thing" type="Sprite2D" parent="."]
+position = Vector2(-5.96046e-08, -10)
+scale = Vector2(0.125312, 0.043125)
+texture = ExtResource("1_13yn0")
+
+[node name="No_Power" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_13yn0")
+
+[node name="Sword" type="Sprite2D" parent="."]
+
+[node name="Blast" type="Sprite2D" parent="."]
