@@ -17,6 +17,7 @@ var controller_input : String
 ## Used to keep track of the direction the wizard is facing
 var is_left : bool = false
 var master_id : int
+var target_pose = position ## Only for multiplayer
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -28,12 +29,14 @@ func _ready() -> void:
 		set_multiplayer_authority(player_number)
 	
 func _physics_process(delta: float) -> void:
+	if master_id != multiplayer.get_unique_id():
+		position = position.lerp(target_pose, 10 * delta)
 	set_new_position(delta)
 	set_animation()
 	check_position()
 	
 func set_pose(target_pose : Vector2):
-	position = target_pose
+	self.target_pose = target_pose
 	
 func set_new_position(delta) -> void:
 	if master_id == multiplayer.get_unique_id():
@@ -87,16 +90,16 @@ func check_position():
 	var pose = position
 	
 	# Checks X
-	if pose[0] < -440:
-		pose[0] = 440
-	elif pose[0] > 440:
-		pose[0] = -440
+	if pose[0] < -1280:
+		pose[0] = 1280
+	elif pose[0] > 1280:
+		pose[0] = 0
 	
 	# Checks Y
-	if pose[1] > 250:
-		pose[1] = -250
-	elif pose[1] < -250:
-		pose[1] = 250	
+	if pose[1] < 0:
+		pose[1] = 720
+	elif pose[1] > 720:
+		pose[1] = 0	
 	
 	
 	position = pose

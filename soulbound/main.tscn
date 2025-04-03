@@ -6,5 +6,6 @@
 [node name="Main" type="Node"]
 
 [node name="Map_1" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(618, 472)
 
 [node name="Networking" parent="." instance=ExtResource("2_h2yge")]

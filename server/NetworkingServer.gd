@@ -49,10 +49,16 @@ func add_player(new_peer_id : int) -> void:
 	print("Player " + str(new_peer_id) + " joined.")
 	print("Currently connected Players: " + str(connected_peer_ids))
 	rpc("sync_player_list", connected_peer_ids)
-	rpc("spawn_player", new_peer_id)
+	var pose : Vector2
+	# Sets `pose` to the correct position
+	if !player_positions.has(new_peer_id):
+		pose = Vector2(randf_range(-240, 240), 0)
+	else:
+		pose = player_positions.get(new_peer_id)
+	rpc("spawn_player", new_peer_id, pose)
 	for id in connected_peer_ids:
 		if id != new_peer_id:
-			rpc_id(new_peer_id, "spawn_player", id)
+			rpc_id(new_peer_id, "spawn_player", id, pose)
 
 func _on_peer_disconnected(leaving_peer_id : int) -> void:
 	# The disconnect signal fires before the client is removed from the connected
@@ -71,9 +77,8 @@ func delete_player(leaving_peer_id : int) -> void:
 	rpc("sync_player_list", connected_peer_ids)
 
 @rpc
-func remove_player(leaving_peer_id : int) -> void:
+func remove_player(_leaving_peer_id : int) -> void:
 	pass
-
 
 @rpc
 func sync_player_list(_updated_connected_peer_ids):
@@ -82,7 +87,7 @@ func sync_player_list(_updated_connected_peer_ids):
 	pass
 
 @rpc 
-func spawn_player(_peer_id: int):
+func spawn_player(_peer_id: int, _pose : Vector2):
 	# This is just a placeholder to satisfy RPC requirement
 	# The actual logic is handled on the client side
 	pass
