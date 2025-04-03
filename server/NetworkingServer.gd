@@ -6,9 +6,6 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 # Store the positions of players by their peer ID
 var player_positions = {}
 
-# Interval to update clients with player positions (e.g., every 1/30th of a second)
-const POSITION_SYNC_INTERVAL = 1.0 / 30.0
-var position_sync_timer : Timer
 var connected_peer_ids = []
 
 func _ready():
@@ -24,24 +21,11 @@ func _ready():
 	
 	print("Server started, waitingn for players...")
 
-	# Set up the timer to sync positions every few milliseconds
-	position_sync_timer = Timer.new()
-	position_sync_timer.one_shot = false  # Repeat the timer
-	position_sync_timer.wait_time = POSITION_SYNC_INTERVAL
-	add_child(position_sync_timer)  # Add it to the scene tree
-	
-	# Correctly connect the timeout signal
-	position_sync_timer.connect("timeout", Callable(self, "_sync_positions"))
-
-	# Start the timer
-	position_sync_timer.start()
-
 func _on_peer_connected(new_peer_id : int) -> void:
 	print("Player " + str(new_peer_id) + " is joining...")
 	# The connect signal fires before the client is added to the connected
 	# clients in multiplayer.get_peers(), so we wait for a moment.
 	await get_tree().create_timer(1).timeout
-	player_positions[new_peer_id] = Vector2(0, 0)  # Initialize player position at (0, 0)
 	add_player(new_peer_id)
 
 func add_player(new_peer_id : int) -> void:
@@ -52,7 +36,8 @@ func add_player(new_peer_id : int) -> void:
 	var pose : Vector2
 	# Sets `pose` to the correct position
 	if !player_positions.has(new_peer_id):
-		pose = Vector2(randf_range(-240, 240), 0)
+		pose = Vector2(-1, -1)
+		player_positions.set(new_peer_id, pose)
 	else:
 		pose = player_positions.get(new_peer_id)
 	rpc("spawn_player", new_peer_id, pose)

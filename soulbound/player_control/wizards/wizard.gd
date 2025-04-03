@@ -35,8 +35,8 @@ func _physics_process(delta: float) -> void:
 	set_animation()
 	check_position()
 	
-func set_pose(target_pose : Vector2):
-	self.target_pose = target_pose
+func set_pose(new_target_pose : Vector2):
+	target_pose = new_target_pose
 	
 func set_new_position(delta) -> void:
 	if master_id == multiplayer.get_unique_id():
