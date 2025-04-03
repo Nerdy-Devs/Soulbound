@@ -100,8 +100,8 @@ func update_player_position(peer_id: int, position: Vector2):
 	# Update the player's position locally on the server (you can store this in a dictionary)
 	player_positions[peer_id] = position
 	
-	# Now send this position update to all other connected clients
-	for other_peer_id in player_positions.keys():
-		if other_peer_id != peer_id:
-			if multiplayer.get_peers().has(other_peer_id):
-				rpc_id(other_peer_id, "update_player_position", peer_id, position)
+	## Now send this position update to all other connected clients
+	#for other_peer_id in player_positions.keys():
+		#if other_peer_id != peer_id:
+			#if multiplayer.get_peers().has(other_peer_id):
+				#rpc_id(other_peer_id, "update_player_position", peer_id, position)

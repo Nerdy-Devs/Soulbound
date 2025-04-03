@@ -7,12 +7,14 @@ var url : String = "your-prod.url"
 const PORT = 9009
 var wizard_scene : PackedScene  # Reference to the player scene
 var my_id
-# Interval to update clients with player positions (e.g., every 1/30th of a second)
-const POSITION_SYNC_INTERVAL = 1.0 / 120.0
+## Interval to update clients with player positions (e.g., every 1/30th of a second)
+const POSITION_SYNC_INTERVAL = 1.0 / 30.0
 var position_sync_timer : Timer
 
-# Track player instances by their peer ID
+## Track player instances by their peer ID
 var player_instances = {}
+## Track the previous player pose to see whether to update it or not
+var previous_positions = {}
 
 var connected_peer_ids = []
 
@@ -67,16 +69,16 @@ func _sync_positions():
 		update_player_position(my_id, player_instances.get(my_id).position)
 	pass
 	
-@rpc
+@rpc("any_peer")
 func update_player_position(peer_id: int, position: Vector2):
 	# Handle updating the player's position locally
 	if player_instances.has(peer_id):
 		var player_instance = player_instances[peer_id]
 		if peer_id == my_id:
 			position = player_instance.position
-			rpc_id(1, "update_player_position", my_id, position)
+			rpc("update_player_position", my_id, position)
 		else:
-			player_instance.position = position # Update the position of the player
+			player_instance.set_pose(position) # Update the position of the player
 			#print("Updating position of player " + str(peer_id) + " to " + str(position))
 
 func _on_connect_btn_pressed() -> void:

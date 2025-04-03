@@ -32,6 +32,9 @@ func _physics_process(delta: float) -> void:
 	set_animation()
 	check_position()
 	
+func set_pose(target_pose : Vector2):
+	position = target_pose
+	
 func set_new_position(delta) -> void:
 	if master_id == multiplayer.get_unique_id():
 		# Add the gravity.
