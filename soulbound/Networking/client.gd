@@ -47,19 +47,20 @@ func sync_player_list(updated_connected_peer_ids):
 @rpc
 func spawn_player(peer_id: int):
 	# Ensure spawn behavior is correct when syncing with peers
-	var player_instance = wizard_scene.instantiate()
-	player_instance.name = "Player_" + str(peer_id)
-	player_instance.player_number = 1
-	player_instance.master_id = peer_id
-	#player_instance.set_network_master(peer_id)  # Assign this player to the correct peer
+	if !player_instances.has(peer_id):
+		var player_instance = wizard_scene.instantiate()
+		player_instance.name = "Player_" + str(peer_id)
+		player_instance.player_number = 1
+		player_instance.master_id = peer_id
+		#player_instance.set_network_master(peer_id)  # Assign this player to the correct peer
 
-	# Set a random spawn position (you can modify this based on your needs)
-	player_instance.position = Vector2(randf_range(-240, 240), 0)
+		# Set a random spawn position (you can modify this based on your needs)
+		player_instance.position = Vector2(randf_range(-240, 240), 0)
 
-	# Add the player instance to the scene tree
-	get_tree().root.add_child(player_instance)
-	player_instances[peer_id] = player_instance  # Track the player by peer_id
-	print("Player " + str(peer_id) + " spawned.")
+		# Add the player instance to the scene tree
+		get_tree().root.add_child(player_instance)
+		player_instances[peer_id] = player_instance  # Track the player by peer_id
+		print("Player " + str(peer_id) + " spawned.")
 	
 func _sync_positions():
 	if player_instances.has(my_id):

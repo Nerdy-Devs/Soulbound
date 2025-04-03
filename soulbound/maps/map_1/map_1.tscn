@@ -210,4 +210,5 @@ zoom = Vector2(1.485, 1.485)
 position = Vector2(-49, 8)
 
 [node name="Basic_player" parent="." instance=ExtResource("4_2jira")]
+visible = false
 position = Vector2(-151, -21)
