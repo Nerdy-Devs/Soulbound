@@ -8,7 +8,7 @@ const PORT = 9009
 var wizard_scene : PackedScene  # Reference to the player scene
 var my_id
 # Interval to update clients with player positions (e.g., every 1/30th of a second)
-const POSITION_SYNC_INTERVAL = 1.0 / 30.0
+const POSITION_SYNC_INTERVAL = 1.0 / 120.0
 var position_sync_timer : Timer
 
 # Track player instances by their peer ID
@@ -73,6 +73,7 @@ func update_player_position(peer_id: int, position: Vector2):
 		var player_instance = player_instances[peer_id]
 		if peer_id == my_id:
 			position = player_instance.position
+			rpc_id(1, "update_player_position", my_id, position)
 		else:
 			player_instance.position = position # Update the position of the player
 			#print("Updating position of player " + str(peer_id) + " to " + str(position))
@@ -94,6 +95,12 @@ func _on_server_disconnected():
 	update_connection_buttons()
 	print("Connection to server lost.")
 	
+@rpc
+func remove_player(peer_id: int):
+	if player_instances.has(peer_id):
+		player_instances[peer_id].queue_free()  # Remove from scene
+		player_instances.erase(peer_id)  # Remove from dictionary
+
 
 func update_connection_buttons() -> void:
 	# Update UI buttons for connect/disconnect based on state
