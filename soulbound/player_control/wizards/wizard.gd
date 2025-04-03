@@ -53,31 +53,32 @@ func set_new_position(delta) -> void:
 		move_and_slide()
 
 func set_animation() -> void:
-	if Input.is_action_pressed(controller_input + "_attack_1"):
-		$Wizard_Animated.animation = "attack_1"
-	else:
-		# If the player is going up/down, use the jump animation
-		if velocity.y != 0:
-			$Wizard_Animated.animation = "jump"
-			
-		# If the player is going left or right use the run animation
-		elif velocity.x != 0:
-			$Wizard_Animated.animation = "run"
-
-		# If the player isn't moving, use the idle animationasd
-		if velocity.length() <= 0:
-			$Wizard_Animated.animation = "idle"
-
-	## If the player wants to go left, invert the animation horizontally
-	if velocity.x != 0:
-		is_left = Input.is_action_pressed(controller_input + "_move_left")
+	if master_id == multiplayer.get_unique_id():
+		if Input.is_action_pressed(controller_input + "_attack_1"):
+			$Wizard_Animated.animation = "attack_1"
+		else:
+			# If the player is going up/down, use the jump animation
+			if velocity.y != 0:
+				$Wizard_Animated.animation = "jump"
 				
-	velocity.x = clamp(velocity.x, -50, 50)
-	velocity.y = clamp(velocity.y, -300, 300)
-				
-	$Wizard_Animated.flip_h = is_left
-	
-	$Wizard_Animated.play()
+			# If the player is going left or right use the run animation
+			elif velocity.x != 0:
+				$Wizard_Animated.animation = "run"
+
+			# If the player isn't moving, use the idle animationasd
+			if velocity.length() <= 0:
+				$Wizard_Animated.animation = "idle"
+
+		## If the player wants to go left, invaert the animation horizontally
+		if velocity.x != 0:
+			is_left = Input.is_action_pressed(controller_input + "_move_left")
+					
+		velocity.x = clamp(velocity.x, -50, 50)
+		velocity.y = clamp(velocity.y, -300, 300)
+					
+		$Wizard_Animated.flip_h = is_left
+		
+		$Wizard_Animated.play()
 	
 func check_position():
 	var pose = position

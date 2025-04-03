@@ -50,11 +50,14 @@ func add_player(new_peer_id : int) -> void:
 	print("Currently connected Players: " + str(connected_peer_ids))
 	rpc("sync_player_list", connected_peer_ids)
 	rpc("spawn_player", new_peer_id)
+	for id in connected_peer_ids:
+		if id != new_peer_id:
+			rpc_id(new_peer_id, "spawn_player", id)
 
 func _on_peer_disconnected(leaving_peer_id : int) -> void:
 	# The disconnect signal fires before the client is removed from the connected
 	# clients in multiplayer.get_peers(), so we wait for a moment.
-	await get_tree().create_timer(1).timeout 
+	await get_tree().create_timer(1).timeout
 	remove_player(leaving_peer_id)
 	player_positions.erase(leaving_peer_id)
 

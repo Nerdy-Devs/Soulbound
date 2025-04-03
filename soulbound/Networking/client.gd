@@ -75,7 +75,7 @@ func update_player_position(peer_id: int, position: Vector2):
 			position = player_instance.position
 		else:
 			player_instance.position = position # Update the position of the player
-			print("Updating position of player " + str(peer_id) + " to " + str(position))
+			#print("Updating position of player " + str(peer_id) + " to " + str(position))
 
 func _on_connect_btn_pressed() -> void:
 	print("Connecting ...")
