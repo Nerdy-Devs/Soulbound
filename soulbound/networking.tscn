@@ -29,4 +29,5 @@ placeholder_text = "Soulbound"
 alignment = 1
 
 [connection signal="pressed" from="Connect" to="." method="_on_connect_btn_pressed"]
+[connection signal="text_changed" from="Username" to="." method="_on_username_text_changed"]
 [connection signal="text_submitted" from="Username" to="." method="_on_username_text_submitted"]

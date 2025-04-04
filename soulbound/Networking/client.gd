@@ -43,7 +43,6 @@ func _ready():
 func sync_player_list(updated_connected_peer_ids):
 	# Ensure peer ID list matches across all clients
 	connected_peer_ids = updated_connected_peer_ids
-	print("Currently connected Players: " + str(connected_peer_ids))
 
 @rpc("any_peer")
 func spawn_player(peer_id: int, pose : Vector2, user_name : String):
@@ -83,18 +82,12 @@ func update_animation(peer_id : int, animation : String, is_left : bool):
 func _on_connect_btn_pressed() -> void:
 	if !$"Server IP".text.is_empty():
 		url = $"Server IP".text
-	print("Connecting to, ", url, " ...")
 	multiplayer_peer.create_client(url, PORT)
 	my_id = multiplayer_peer.get_unique_id()
 	multiplayer.multiplayer_peer = multiplayer_peer
 
-func _on_disconnect_btn_pressed():
-	multiplayer_peer.close()
-	print("Disconnected.")
-
 func _on_server_disconnected():
 	multiplayer_peer.close()
-	print("Connection to server lost.")
 	
 func _on_server_connected():
 	var username : String = get_username()
@@ -112,9 +105,6 @@ func setup_player(peer_id: int, pose : Vector2, username : String):
 	player_instance.master_id = peer_id
 	player_instance.set_username(username)
 	
-	print("Username: ", player_instance.username)
-	#player_instance.set_network_master(peer_id)  # Assign this player to the correct peer
-
 	# Set a random spawn position (you can modify this based on your needs)
 	player_instance.position = pose
 
@@ -137,9 +127,11 @@ func remove_player(peer_id: int):
 		player_instances.erase(peer_id)  # Remove from dictionary
 
 
-func _on_username_text_submitted(new_text: String) -> void:
+func _on_username_text_submitted(_new_text: String) -> void:
 	var username : String = get_username()
-	player_instances.get(my_id).set_username(username)
+	player_instances.get(my_id).text_focused = false
+	if player_instances.has(my_id):
+		player_instances.get(my_id).set_username(username)
 	rpc("update_player_username", my_id, username)
 
 func get_username() -> String:
@@ -149,3 +141,7 @@ func get_username() -> String:
 	else: username = $Username.text
 	
 	return username
+
+func _on_username_text_changed(_new_text: String) -> void:
+	if player_instances.has(my_id):
+		player_instances.get(my_id).text_focused = true

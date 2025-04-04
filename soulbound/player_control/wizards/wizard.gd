@@ -20,10 +20,12 @@ var username : String = "Player " + str(player_number)
 ## Used to keep track of the direction the wizard is facing
 var is_left : bool = false
 var master_id : int
-var focus ## What the player has selected
+var text_focused : bool = false ## Is the player selecting text
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
+	
+	#text_focus = get_tree().root.get_focus_owner() is LineEdit or get_tree().root.get_focus_owner() is TextEdit
 	
 	controller_input = "player_" + str(player_number)
 	
@@ -39,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	check_position()
 
 func set_new_position(delta) -> void:
-	if master_id == multiplayer.get_unique_id():
+	if master_id == multiplayer.get_unique_id() && !text_focused:
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -60,6 +62,7 @@ func set_new_position(delta) -> void:
 
 func set_animation(animation = "") -> void:	
 	if master_id == multiplayer.get_unique_id() and animation.is_empty():
+		
 		if Input.is_action_pressed(controller_input + "_attack_1"):
 			$Wizard_Animated.animation = "attack_1"
 		else:
@@ -77,7 +80,7 @@ func set_animation(animation = "") -> void:
 				$Wizard_Animated.animation = "idle"
 
 		## If the player wants to go left, invaert the animation horizontally
-		if velocity.x != 0:
+		if velocity.x != 0 && !text_focused:
 			is_left = Input.is_action_pressed(controller_input + "_move_left")
 					
 		velocity.x = clamp(velocity.x, -50, 50)
@@ -87,8 +90,11 @@ func set_animation(animation = "") -> void:
 	elif !animation.is_empty():
 		$Wizard_Animated.animation = animation
 	
+	if text_focused:
+		$Wizard_Animated.animation = "idle"
+	
 	$Wizard_Animated.flip_h = is_left
-	$Wizard_Animated.play()	
+	$Wizard_Animated.play()
 	
 func get_animation() -> String:
 	return $Wizard_Animated.animation

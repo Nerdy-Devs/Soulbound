@@ -6,7 +6,7 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 # Store the positions of players by their peer ID
 var player_positions = {}
 var player_animations = {}
-var peer_usernames = {}
+var player_usernames = {}
 
 var connected_peer_ids = []
 
@@ -33,7 +33,6 @@ func _on_peer_connected(new_peer_id : int) -> void:
 
 @rpc("any_peer")
 func join_game(new_peer_id : int, username : String) -> void:
-	$"Player List".append_text(str(new_peer_id) + ": " + peer_usernames.get(new_peer_id) + "\n")
 	connected_peer_ids.append(new_peer_id)
 	print("Player " + str(new_peer_id) + " joined.")
 	print("Currently connected Players: " + str(connected_peer_ids))
@@ -45,10 +44,11 @@ func join_game(new_peer_id : int, username : String) -> void:
 		player_positions.set(new_peer_id, pose)
 	else:
 		pose = player_positions.get(new_peer_id)
+	update_list()
 	rpc("spawn_player", new_peer_id, pose, username)
 	for id in connected_peer_ids:
 		if id != new_peer_id:
-			rpc_id(new_peer_id, "spawn_player", id, pose, peer_usernames.get(id))
+			rpc_id(new_peer_id, "spawn_player", id, pose, player_usernames.get(id))
 
 func _on_peer_disconnected(leaving_peer_id : int) -> void:
 	# The disconnect signal fires before the client is removed from the connected
@@ -57,6 +57,9 @@ func _on_peer_disconnected(leaving_peer_id : int) -> void:
 	delete_player(leaving_peer_id)
 	rpc("remove_player", leaving_peer_id)
 	player_positions.erase(leaving_peer_id)
+	player_usernames.erase(leaving_peer_id)
+	player_animations.erase(leaving_peer_id)
+	update_list()
 
 func delete_player(leaving_peer_id : int) -> void:
 	var peer_idx_in_peer_list : int = connected_peer_ids.find(leaving_peer_id)
@@ -85,7 +88,8 @@ func spawn_player(_peer_id: int, _pose : Vector2, _username : String):
 
 @rpc("any_peer")
 func update_player_username(peer_id : int, username : String):
-	peer_usernames.set(peer_id, username)
+	player_usernames.set(peer_id, username)
+	update_list()
 
 ## This method syncs the positions of all players to all clients
 func _sync_positions():
@@ -103,3 +107,9 @@ func update_player_position(peer_id: int, position: Vector2):
 @rpc("any_peer")
 func update_animation(peer_id: int, animation: String, _is_left : bool):
 	player_animations[peer_id] = animation
+
+func update_list() -> void:
+	$"Player List".clear()
+	
+	for id in connected_peer_ids:
+		$"Player List".add_item(str(id) + ": " + player_usernames.get(id))

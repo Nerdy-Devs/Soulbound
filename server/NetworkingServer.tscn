@@ -5,13 +5,6 @@
 [node name="Networking" type="Node"]
 script = ExtResource("1_acvag")
 
-[node name="Player List" type="RichTextLabel" parent="."]
-offset_right = 261.0
-offset_bottom = 637.0
-bbcode_enabled = true
-fit_content = true
-scroll_following = true
-
-[node name="ItemList" type="ItemList" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Player List" type="ItemList" parent="."]
+offset_right = 1152.0
+offset_bottom = 640.0
