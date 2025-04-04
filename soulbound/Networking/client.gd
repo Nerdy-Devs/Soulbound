@@ -3,7 +3,7 @@ extends Node
 const DEV = true
 
 var multiplayer_peer = ENetMultiplayerPeer.new()
-var url : String = "your-prod.url"
+var url : String = "127.0.0.1"
 const PORT = 9009
 var wizard_scene : PackedScene  # Reference to the player scene
 var my_id
@@ -21,7 +21,6 @@ var connected_peer_ids = []
 func _ready():
 	if DEV == true:
 		url = "127.0.0.1"
-	update_connection_buttons()
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 	# Preload the wizard scene (player prefab) here
@@ -44,7 +43,6 @@ func sync_player_list(updated_connected_peer_ids):
 	# Ensure peer ID list matches across all clients
 	connected_peer_ids = updated_connected_peer_ids
 	print("Currently connected Players: " + str(connected_peer_ids))
-	update_connection_buttons()
 
 @rpc
 func spawn_player(peer_id: int, pose : Vector2):
@@ -97,20 +95,19 @@ func update_animation(peer_id : int, animation : String, is_left : bool):
 			player_instance.is_left = is_left
 
 func _on_connect_btn_pressed() -> void:
-	print("Connecting ...")
+	if !$"Server IP".text.is_empty():
+		url = $"Server IP".text
+	print("Connecting to, ", url, " ...")
 	multiplayer_peer.create_client(url, PORT)
 	my_id = multiplayer_peer.get_unique_id()
 	multiplayer.multiplayer_peer = multiplayer_peer
-	update_connection_buttons()
 
 func _on_disconnect_btn_pressed():
 	multiplayer_peer.close()
-	update_connection_buttons()
 	print("Disconnected.")
 
 func _on_server_disconnected():
 	multiplayer_peer.close()
-	update_connection_buttons()
 	print("Connection to server lost.")
 	
 @rpc
@@ -118,8 +115,3 @@ func remove_player(peer_id: int):
 	if player_instances.has(peer_id):
 		player_instances[peer_id].queue_free()  # Remove from scene
 		player_instances.erase(peer_id)  # Remove from dictionary
-
-
-func update_connection_buttons() -> void:
-	# Update UI buttons for connect/disconnect based on state
-	pass

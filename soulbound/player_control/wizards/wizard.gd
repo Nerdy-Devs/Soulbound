@@ -14,6 +14,9 @@ var controller_input : String
 ## Allows the wizards to be controlled by different users
 @export var player_number : int = -1
 
+## Username of the Player
+var username : String = "Player " + str(player_number) 
+
 ## Used to keep track of the direction the wizard is facing
 var is_left : bool = false
 var master_id : int
@@ -93,6 +96,10 @@ func set_animation(animation = "") -> void:
 	
 func get_animation() -> String:
 	return $Wizard_Animated.animation
+
+## Return the username of the player
+func get_username() -> String:
+	return username
 	
 func check_position():
 	var pose = position

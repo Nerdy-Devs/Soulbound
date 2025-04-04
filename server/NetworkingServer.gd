@@ -26,10 +26,11 @@ func _on_peer_connected(new_peer_id : int) -> void:
 	print("Player " + str(new_peer_id) + " is joining...")
 	# The connect signal fires before the client is added to the connected
 	# clients in multiplayer.get_peers(), so we wait for a moment.
+	$"Player List".append_text(str(new_peer_id) + "\n")
 	await get_tree().create_timer(1).timeout
-	add_player(new_peer_id)
+	add_player(new_peer_id, "new_player")
 
-func add_player(new_peer_id : int) -> void:
+func add_player(new_peer_id : int, user_name : String) -> void:
 	connected_peer_ids.append(new_peer_id)
 	print("Player " + str(new_peer_id) + " joined.")
 	print("Currently connected Players: " + str(connected_peer_ids))
