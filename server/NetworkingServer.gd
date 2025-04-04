@@ -5,6 +5,7 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 
 # Store the positions of players by their peer ID
 var player_positions = {}
+var player_animations = {}
 
 var connected_peer_ids = []
 
@@ -89,6 +90,10 @@ func _sync_positions():
 func update_player_position(peer_id: int, position: Vector2):
 	# Update the player's position locally on the server (you can store this in a dictionary)
 	player_positions[peer_id] = position
+	
+@rpc("any_peer")
+func update_animation(peer_id: int, animation: String, _is_left : bool):
+	player_animations[peer_id] = animation
 	
 	## Now send this position update to all other connected clients
 	#for other_peer_id in player_positions.keys():

@@ -34,7 +34,7 @@ func _ready():
 	add_child(position_sync_timer)  # Add it to the scene tree
 
 	# Correctly connect the timeout signal
-	position_sync_timer.connect("timeout", Callable(self, "_sync_positions"))
+	position_sync_timer.connect("timeout", Callable(self, "_sync_wizards"))
 
 	# Start the timer
 	position_sync_timer.start()
@@ -67,9 +67,10 @@ func spawn_player(peer_id: int, pose : Vector2):
 		player_instances[peer_id] = player_instance  # Track the player by peer_id
 		print("Player " + str(peer_id) + " spawned.")
 	
-func _sync_positions():
+func _sync_wizards():
 	if player_instances.has(my_id):
 		update_player_position(my_id, player_instances.get(my_id).position)
+		update_animation(my_id, "", false)
 	pass
 	
 @rpc("any_peer")
@@ -82,7 +83,17 @@ func update_player_position(peer_id: int, position: Vector2):
 			rpc("update_player_position", my_id, position)
 		else:
 			player_instance.set_pose(position) # Update the position of the player
-			#print("Updating position of player " + str(peer_id) + " to " + str(position))
+
+@rpc("any_peer")
+func update_animation(peer_id : int, animation : String, is_left : bool):
+	if player_instances.has(peer_id):
+		var player_instance = player_instances.get(peer_id)
+		if peer_id == my_id:
+			animation = player_instance.get_animation()
+			rpc("update_animation", my_id, animation, player_instance.is_left)
+		else:
+			player_instance.set_animation(animation)
+			player_instance.is_left = is_left
 
 func _on_connect_btn_pressed() -> void:
 	print("Connecting ...")

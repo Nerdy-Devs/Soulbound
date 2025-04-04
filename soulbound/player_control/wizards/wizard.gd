@@ -28,6 +28,8 @@ func _ready() -> void:
 	if player_number != multiplayer.get_unique_id():
 		set_multiplayer_authority(player_number)
 	
+	$Wizard_Animated.animation = "idle"
+	
 func _physics_process(delta: float) -> void:
 	if master_id != multiplayer.get_unique_id():
 		position = position.lerp(target_pose, 10 * delta)
@@ -58,8 +60,8 @@ func set_new_position(delta) -> void:
 
 		move_and_slide()
 
-func set_animation() -> void:
-	if master_id == multiplayer.get_unique_id():
+func set_animation(animation = "") -> void:
+	if master_id == multiplayer.get_unique_id() and animation.is_empty():
 		if Input.is_action_pressed(controller_input + "_attack_1"):
 			$Wizard_Animated.animation = "attack_1"
 		else:
@@ -82,9 +84,15 @@ func set_animation() -> void:
 		velocity.x = clamp(velocity.x, -50, 50)
 		velocity.y = clamp(velocity.y, -300, 300)
 					
-		$Wizard_Animated.flip_h = is_left
 		
-		$Wizard_Animated.play()
+	elif !animation.is_empty():
+		$Wizard_Animated.animation = animation
+	
+	$Wizard_Animated.flip_h = is_left
+	$Wizard_Animated.play()	
+	
+func get_animation() -> String:
+	return $Wizard_Animated.animation
 	
 func check_position():
 	var pose = position
