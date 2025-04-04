@@ -41,22 +41,23 @@ func _physics_process(delta: float) -> void:
 	check_position()
 
 func set_new_position(delta) -> void:
-	if master_id == multiplayer.get_unique_id() && !text_focused:
+	if master_id == multiplayer.get_unique_id():
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 
-		# Handle jump.
-		if Input.is_action_just_pressed("player_1_move_up"):
-			velocity.y = JUMP_VELOCITY
+		if !text_focused:
+			# Handle jump.
+			if Input.is_action_just_pressed("player_1_move_up"):
+				velocity.y = JUMP_VELOCITY
 
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
-		var direction = Input.get_axis("player_1_move_left", "player_1_move_right")
-		if direction:
-			velocity.x = direction * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			# Get the input direction and handle the movement/deceleration.
+			# As good practice, you should replace UI actions with custom gameplay actions.
+			var direction = Input.get_axis("player_1_move_left", "player_1_move_right")
+			if direction:
+				velocity.x = direction * SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
 
 		move_and_slide()
 
@@ -65,6 +66,8 @@ func set_animation(animation = "") -> void:
 		
 		if Input.is_action_pressed(controller_input + "_attack_1"):
 			$Wizard_Animated.animation = "attack_1"
+		elif Input.is_action_pressed(controller_input + "_attack_2"):
+			$Wizard_Animated.animation = "attack_2"
 		else:
 			# If the player is going up/down, use the jump animation
 			if velocity.y != 0:
@@ -112,7 +115,7 @@ func check_position():
 	var pose = position
 	
 	# Checks X
-	if pose[0] < -1280:
+	if pose[0] < 0:
 		pose[0] = 1280
 	elif pose[0] > 1280:
 		pose[0] = 0

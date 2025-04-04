@@ -8,3 +8,9 @@ script = ExtResource("1_acvag")
 [node name="Player List" type="ItemList" parent="."]
 offset_right = 1152.0
 offset_bottom = 640.0
+
+[node name="Position Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Position Timer" to="." method="__on_position_timeout"]

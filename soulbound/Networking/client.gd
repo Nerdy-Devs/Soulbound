@@ -87,6 +87,7 @@ func _on_connect_btn_pressed() -> void:
 	multiplayer.multiplayer_peer = multiplayer_peer
 
 func _on_server_disconnected():
+	remove_player(my_id)
 	multiplayer_peer.close()
 	
 func _on_server_connected():

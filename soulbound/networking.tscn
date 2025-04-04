@@ -21,10 +21,10 @@ placeholder_text = "Server IP - 127.0.0.1"
 alignment = 1
 
 [node name="Username" type="LineEdit" parent="."]
-offset_left = 1080.0
-offset_top = 111.0
-offset_right = 1241.0
-offset_bottom = 142.0
+offset_left = 1069.0
+offset_top = 113.0
+offset_right = 1256.0
+offset_bottom = 144.0
 placeholder_text = "Soulbound"
 alignment = 1
 
