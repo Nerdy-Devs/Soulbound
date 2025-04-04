@@ -20,7 +20,7 @@ var username : String = "Player " + str(player_number)
 ## Used to keep track of the direction the wizard is facing
 var is_left : bool = false
 var master_id : int
-var target_pose = position ## Only for multiplayer
+var focus ## What the player has selected
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -34,15 +34,10 @@ func _ready() -> void:
 	$Wizard_Animated.animation = "idle"
 	
 func _physics_process(delta: float) -> void:
-	if master_id != multiplayer.get_unique_id():
-		position = position.lerp(target_pose, 10 * delta)
 	set_new_position(delta)
 	set_animation()
 	check_position()
-	
-func set_pose(new_target_pose : Vector2):
-	target_pose = new_target_pose
-	
+
 func set_new_position(delta) -> void:
 	if master_id == multiplayer.get_unique_id():
 		# Add the gravity.
@@ -63,14 +58,15 @@ func set_new_position(delta) -> void:
 
 		move_and_slide()
 
-func set_animation(animation = "") -> void:
+func set_animation(animation = "") -> void:	
 	if master_id == multiplayer.get_unique_id() and animation.is_empty():
 		if Input.is_action_pressed(controller_input + "_attack_1"):
 			$Wizard_Animated.animation = "attack_1"
 		else:
 			# If the player is going up/down, use the jump animation
 			if velocity.y != 0:
-				$Wizard_Animated.animation = "jump"
+				if velocity.y > 0: $Wizard_Animated.animation = "fall"
+				else: $Wizard_Animated.animation = "jump"
 				
 			# If the player is going left or right use the run animation
 			elif velocity.x != 0:
@@ -96,6 +92,11 @@ func set_animation(animation = "") -> void:
 	
 func get_animation() -> String:
 	return $Wizard_Animated.animation
+
+@warning_ignore("shadowed_variable")
+func set_username(username : String):
+	self.username = username
+	$Username.text = username
 
 ## Return the username of the player
 func get_username() -> String:

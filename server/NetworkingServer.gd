@@ -6,6 +6,7 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 # Store the positions of players by their peer ID
 var player_positions = {}
 var player_animations = {}
+var peer_usernames = {}
 
 var connected_peer_ids = []
 
@@ -26,11 +27,13 @@ func _on_peer_connected(new_peer_id : int) -> void:
 	print("Player " + str(new_peer_id) + " is joining...")
 	# The connect signal fires before the client is added to the connected
 	# clients in multiplayer.get_peers(), so we wait for a moment.
-	$"Player List".append_text(str(new_peer_id) + "\n")
 	await get_tree().create_timer(1).timeout
-	add_player(new_peer_id, "new_player")
+	#add_player(new_peer_id, "new_player")
+	
 
-func add_player(new_peer_id : int, user_name : String) -> void:
+@rpc("any_peer")
+func join_game(new_peer_id : int, username : String) -> void:
+	$"Player List".append_text(str(new_peer_id) + ": " + peer_usernames.get(new_peer_id) + "\n")
 	connected_peer_ids.append(new_peer_id)
 	print("Player " + str(new_peer_id) + " joined.")
 	print("Currently connected Players: " + str(connected_peer_ids))
@@ -42,10 +45,10 @@ func add_player(new_peer_id : int, user_name : String) -> void:
 		player_positions.set(new_peer_id, pose)
 	else:
 		pose = player_positions.get(new_peer_id)
-	rpc("spawn_player", new_peer_id, pose)
+	rpc("spawn_player", new_peer_id, pose, username)
 	for id in connected_peer_ids:
 		if id != new_peer_id:
-			rpc_id(new_peer_id, "spawn_player", id, pose)
+			rpc_id(new_peer_id, "spawn_player", id, pose, peer_usernames.get(id))
 
 func _on_peer_disconnected(leaving_peer_id : int) -> void:
 	# The disconnect signal fires before the client is removed from the connected
@@ -73,31 +76,30 @@ func sync_player_list(_updated_connected_peer_ids):
 	# The server may not need implementation but it must exist for the client
 	pass
 
-@rpc 
-func spawn_player(_peer_id: int, _pose : Vector2):
+@rpc("any_peer")
+func spawn_player(_peer_id: int, _pose : Vector2, _username : String):
 	# This is just a placeholder to satisfy RPC requirement
 	# The actual logic is handled on the client side
 	pass
-	
-# This method syncs the positions of all players to all clients
+
+
+@rpc("any_peer")
+func update_player_username(peer_id : int, username : String):
+	peer_usernames.set(peer_id, username)
+
+## This method syncs the positions of all players to all clients
 func _sync_positions():
 	# Send the player positions to all clients
 	for peer_id in player_positions.keys():
 		rpc("update_player_position", peer_id, player_positions[peer_id])
 
-# The client will receive this and update the player’s position
-# Server-side function to handle position updates from a client
+## The client will receive this and update the player’s position
+## Server-side function to handle position updates from a client
 @rpc("any_peer")
 func update_player_position(peer_id: int, position: Vector2):
-	# Update the player's position locally on the server (you can store this in a dictionary)
+	# Update the player's position locally on the server
 	player_positions[peer_id] = position
 	
 @rpc("any_peer")
 func update_animation(peer_id: int, animation: String, _is_left : bool):
 	player_animations[peer_id] = animation
-	
-	## Now send this position update to all other connected clients
-	#for other_peer_id in player_positions.keys():
-		#if other_peer_id != peer_id:
-			#if multiplayer.get_peers().has(other_peer_id):
-				#rpc_id(other_peer_id, "update_player_position", peer_id, position)

@@ -378,3 +378,11 @@ speed_scale = 2.5
 position = Vector2(-2, 2)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("CapsuleShape2D_tkj3v")
+
+[node name="Username" type="Label" parent="."]
+offset_left = -195.0
+offset_top = -38.0
+offset_right = 194.0
+offset_bottom = -15.0
+text = "MADMAN-Modding"
+horizontal_alignment = 1

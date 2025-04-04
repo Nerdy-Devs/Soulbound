@@ -12,14 +12,21 @@ offset_right = 1212.0
 offset_bottom = 71.0
 text = "Join Server"
 
-[node name="Server IP" type="TextEdit" parent="."]
+[node name="Server IP" type="LineEdit" parent="."]
 offset_left = 1080.0
-offset_top = 80.0
-offset_right = 1244.0
-offset_bottom = 119.0
-placeholder_text = "127.0.01 - Server IP"
-draw_control_chars = true
-draw_tabs = true
-draw_spaces = true
+offset_top = 76.0
+offset_right = 1241.0
+offset_bottom = 107.0
+placeholder_text = "Server IP - 127.0.0.1"
+alignment = 1
+
+[node name="Username" type="LineEdit" parent="."]
+offset_left = 1080.0
+offset_top = 111.0
+offset_right = 1241.0
+offset_bottom = 142.0
+placeholder_text = "Soulbound"
+alignment = 1
 
 [connection signal="pressed" from="Connect" to="." method="_on_connect_btn_pressed"]
+[connection signal="text_submitted" from="Username" to="." method="_on_username_text_submitted"]

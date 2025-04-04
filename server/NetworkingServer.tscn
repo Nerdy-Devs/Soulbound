@@ -11,3 +11,7 @@ offset_bottom = 637.0
 bbcode_enabled = true
 fit_content = true
 scroll_following = true
+
+[node name="ItemList" type="ItemList" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
