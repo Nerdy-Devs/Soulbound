@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7rwedjl6p412"]
+[gd_scene load_steps=4 format=3 uid="uid://b7rwedjl6p412"]
 
+[ext_resource type="Script" uid="uid://bm4745jiy6uj2" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ccbf7vgn4pxmg" path="res://maps/map_1/map_1.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bk560kdel1h33" path="res://networking.tscn" id="2_h2yge"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_h2yge")
 
 [node name="Map_1" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(618, 472)
 
 [node name="Networking" parent="." instance=ExtResource("2_h2yge")]
+
+[node name="Debug Player" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Debug Player"
+
+[connection signal="pressed" from="Debug Player" to="." method="spawn_debug_player"]

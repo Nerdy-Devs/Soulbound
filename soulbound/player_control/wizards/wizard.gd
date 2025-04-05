@@ -19,7 +19,7 @@ var username : String = "Player " + str(player_number)
 
 ## Used to keep track of the direction the wizard is facing
 var is_left : bool = false
-var master_id : int
+var master_id : int = 1
 var text_focused : bool = false ## Is the player selecting text
 
 func _ready() -> void:
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	check_position()
 
 func set_new_position(delta) -> void:
-	if master_id == multiplayer.get_unique_id():
+	if master_id == multiplayer.get_unique_id() || master_id == -1:
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -62,7 +62,7 @@ func set_new_position(delta) -> void:
 		move_and_slide()
 
 func set_animation(animation = "") -> void:	
-	if master_id == multiplayer.get_unique_id() and animation.is_empty():
+	if master_id == multiplayer.get_unique_id() and animation.is_empty() || master_id == -1:
 		
 		if Input.is_action_pressed(controller_input + "_attack_1"):
 			$Wizard_Animated.animation = "attack_1"
