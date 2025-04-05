@@ -1,14 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://bk560kdel1h33"]
 
-[ext_resource type="Script" uid="uid://dk5lssypnknxn" path="res://Networking/client.gd" id="1_5dl6s"]
+[ext_resource type="Script" uid="uid://dk5lssypnknxn" path="res://Networking/networking.gd" id="1_5dl6s"]
 
 [node name="Networking" type="Node"]
 script = ExtResource("1_5dl6s")
 
 [node name="Connect" type="Button" parent="."]
-offset_left = 1112.0
+offset_left = 1060.0
 offset_top = 40.0
-offset_right = 1212.0
+offset_right = 1160.0
 offset_bottom = 71.0
 text = "Join Server"
 
@@ -28,6 +28,14 @@ offset_bottom = 144.0
 placeholder_text = "Soulbound"
 alignment = 1
 
+[node name="Start Server" type="Button" parent="."]
+offset_left = 1166.0
+offset_top = 40.0
+offset_right = 1266.0
+offset_bottom = 71.0
+text = "Start Server"
+
 [connection signal="pressed" from="Connect" to="." method="_on_connect_btn_pressed"]
 [connection signal="text_changed" from="Username" to="." method="_on_username_text_changed"]
 [connection signal="text_submitted" from="Username" to="." method="_on_username_text_submitted"]
+[connection signal="pressed" from="Start Server" to="." method="start_server"]

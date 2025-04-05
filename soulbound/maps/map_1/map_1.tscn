@@ -207,5 +207,4 @@ tile_set = SubResource("TileSet_0l2ke")
 position = Vector2(-49, 8)
 
 [node name="Basic_player" parent="." instance=ExtResource("4_2jira")]
-visible = false
 position = Vector2(-151, -21)

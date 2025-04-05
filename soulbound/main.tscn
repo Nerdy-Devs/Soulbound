@@ -11,10 +11,3 @@ script = ExtResource("1_h2yge")
 position = Vector2(618, 472)
 
 [node name="Networking" parent="." instance=ExtResource("2_h2yge")]
-
-[node name="Debug Player" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Debug Player"
-
-[connection signal="pressed" from="Debug Player" to="." method="spawn_debug_player"]
