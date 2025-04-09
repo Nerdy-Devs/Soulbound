@@ -34,6 +34,7 @@ func _ready():
 
 ### SERVER-INTEGRATED: HOST MODE ENTRYPOINT
 func start_server():
+	multiplayer_peer.close()
 	var error = multiplayer_peer.create_server(PORT)
 	if error != OK:
 		push_error("Failed to start server: " + str(error))
@@ -69,7 +70,6 @@ func _on_server_connected():
 @rpc("any_peer")
 func join_game(new_peer_id : int, username : String):
 	if is_multiplayer_authority():
-		print("AUTHORITY")
 		connected_peer_ids.append(new_peer_id)
 		print("Player " + str(new_peer_id) + " joined.")
 		print("Currently connected Players: " + str(connected_peer_ids))
@@ -142,6 +142,7 @@ func update_player_username(peer_id: int, username: String, joining: bool):
 
 @rpc
 func remove_player(peer_id: int):
+	print("Removing: ", peer_id)
 	if player_instances.has(peer_id):
 		player_instances[peer_id].queue_free()
 		player_instances.erase(peer_id)
@@ -161,6 +162,7 @@ func _on_peer_connected(new_peer_id: int):
 func _on_peer_disconnected(leaving_peer_id: int):
 	await get_tree().create_timer(1).timeout
 	delete_player(leaving_peer_id)
+	remove_player(leaving_peer_id)
 	rpc("remove_player", leaving_peer_id)
 	player_positions.erase(leaving_peer_id)
 	player_usernames.erase(leaving_peer_id)
@@ -194,6 +196,8 @@ func _on_username_text_submitted(_text: String):
 	if player_instances.has(my_id):
 		player_instances[my_id].set_username(username)
 		player_instances[my_id].text_focused = false
+		player_usernames.set(my_id, username)
+		print(player_usernames)
 		rpc("update_player_username", my_id, username, false)
 
 func _on_username_text_changed(_text: String):
