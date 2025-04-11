@@ -34,6 +34,9 @@ func _ready():
 
 ### SERVER-INTEGRATED: HOST MODE ENTRYPOINT
 func start_server():
+	for id in connected_peer_ids:
+		remove_player(id)
+		
 	multiplayer_peer.close()
 	multiplayer_peer.set_bind_ip("0.0.0.0")
 
@@ -58,6 +61,9 @@ func start_server():
 
 
 func connect_to_server(ip: String):
+	for id in connected_peer_ids:
+		remove_player(id)
+	multiplayer_peer.close()
 	url = ip
 	multiplayer_peer.create_client(url, PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
