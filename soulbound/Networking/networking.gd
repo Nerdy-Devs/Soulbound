@@ -35,7 +35,9 @@ func _ready():
 ### SERVER-INTEGRATED: HOST MODE ENTRYPOINT
 func start_server():
 	multiplayer_peer.close()
-	var error = multiplayer_peer.create_server(PORT)
+	multiplayer_peer.set_bind_ip("0.0.0.0")
+
+	var error = multiplayer_peer.create_server(PORT, 8)
 	if error != OK:
 		push_error("Failed to start server: " + str(error))
 		return

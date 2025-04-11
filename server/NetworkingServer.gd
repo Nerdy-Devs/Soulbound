@@ -112,7 +112,7 @@ func update_list() -> void:
 	$"Player List".clear()
 	
 	for id in connected_peer_ids:
-		$"Player List".add_item(str(id) + ": " + player_usernames.get(id) + ", Player Position: " + str(player_positions.get(id)))
+		$"Player List".add_item(str(id) + ": " + player_usernames.get_or_add(id, "null") + ", Player Position: " + str(player_positions.get_or_add(id, Vector2(-1, -1))))
 
 
 func __on_position_timeout() -> void:
