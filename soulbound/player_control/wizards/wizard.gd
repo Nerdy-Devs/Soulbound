@@ -30,7 +30,7 @@ func _ready() -> void:
 	controller_input = "player_" + str(player_number)
 	
 	# Assign ownership to ensure only the correct client controls this character
-	if player_number != multiplayer.get_unique_id():
+	if master_id != multiplayer.get_unique_id():
 		set_multiplayer_authority(player_number)
 	
 	$Wizard_Animated.animation = "idle"
@@ -48,12 +48,12 @@ func set_new_position(delta) -> void:
 
 		if !text_focused:
 			# Handle jump.
-			if Input.is_action_just_pressed("player_1_move_up"):
+			if Input.is_action_just_pressed(controller_input + "_move_up"):
 				velocity.y = JUMP_VELOCITY
 
 			# Get the input direction and handle the movement/deceleration.
 			# As good practice, you should replace UI actions with custom gameplay actions.
-			var direction = Input.get_axis("player_1_move_left", "player_1_move_right")
+			var direction = Input.get_axis(controller_input + "_move_left", controller_input + "_move_right")
 			if direction:
 				velocity.x = direction * SPEED
 			else:
